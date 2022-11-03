@@ -2,9 +2,11 @@
 let todoinput = document.querySelector(".todo-input")
 let todobutton = document.querySelector(".todo-button")
 let todolist = document.querySelector(".todo-list")
+let filteroption = document.querySelector(".filter-todo")
     //events listener
 todobutton.addEventListener('click', addtodo)
 todolist.addEventListener('click', deletecheck)
+filteroption.addEventListener('click', filtertodo)
     //functions
 function addtodo(event) {
     //prevent form from submitting
@@ -51,4 +53,29 @@ function deletecheck(x) {
         todo.classList.toggle('check')
     }
 
+}
+
+function filtertodo(x) {
+    let todos = todolist.childNodes
+    todos.forEach(function(todo) {
+        switch (x.target.value) {
+            case "all":
+                todo.style.display = "flex"
+                break
+            case "completed":
+                if (todo.classList.contains("check")) {
+                    todo.style.display = "flex"
+                } else {
+                    todo.style.display = "none"
+                }
+                break
+            case "uncompleted":
+                if (!todo.classList.contains("check")) {
+                    todo.style.display = "flex"
+                } else {
+                    todo.style.display = "none"
+                }
+                break
+        }
+    })
 }
